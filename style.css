@@ -38,7 +38,7 @@ header a {
   border: none;
 }
 
-/* ITEMS GRID */
+/* GRID */
 #items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -46,7 +46,7 @@ header a {
   padding: 15px;
 }
 
-/* CARD STYLE (LIKE JIJI) */
+/* CARD */
 .card {
   background: white;
   border-radius: 10px;
@@ -56,7 +56,7 @@ header a {
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 .card img {
@@ -86,7 +86,7 @@ header a {
   border-radius: 5px;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 @media (max-width: 600px) {
   header {
     flex-direction: column;
@@ -96,4 +96,4 @@ header a {
   #search {
     width: 100%;
   }
-        }
+  }
