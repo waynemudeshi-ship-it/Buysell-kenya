@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard - Buy Sell Kenya</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background:#f4f4f4; }
+    .card { background:white; padding:10px; margin:10px 0; border-radius:8px; }
+    button { margin-right:10px; padding:5px 10px; }
+  </style>
+</head>
+<body>
+
+<h1>Buy Sell Kenya - Admin Dashboard</h1>
+
+<div id="items"></div>
+
+<script>
+function getItems() {
+  return JSON.parse(localStorage.getItem("items") || "[]");
+}
+
+function saveItems(items) {
+  localStorage.setItem("items", JSON.stringify(items));
+}
+
+function loadItems() {
+  let items = getItems();
+  let container = document.getElementById("items");
+  container.innerHTML = "";
+
+  items.forEach((item, index) => {
+    container.innerHTML += `
+      <div class="card">
+        <h3>${item.name}</h3>
+        <p>Price: KSh ${item.price}</p>
+        <p>Phone: ${item.phone}</p>
+        <p>Payment Code: ${item.paymentCode || "N/A"}</p>
+        <p>Status: ${item.status}</p>
+
+        <button onclick="approve(${index})">Approve</button>
+        <button onclick="removeItem(${index})">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function approve(i) {
+  let items = getItems();
+  items[i].status = "approved";
+  saveItems(items);
+  loadItems();
+}
+
+function removeItem(i) {
+  let items = getItems();
+  items.splice(i, 1);
+  saveItems(items);
+  loadItems();
+}
+
+loadItems();
+</script>
+
+</body>
+</html>
