@@ -1,38 +1,99 @@
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  background: #f5f6f7;
+  color: #333;
 }
 
+/* HEADER */
 header {
-  background: green;
+  background: #00a651;
   color: white;
   padding: 15px;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 20px;
 }
 
 header a {
   color: white;
-  margin-left: 20px;
+  text-decoration: none;
+  background: #007f3d;
+  padding: 8px 12px;
+  border-radius: 5px;
 }
 
+/* SEARCH */
+#search {
+  padding: 8px;
+  margin-top: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* ITEMS GRID */
 #items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 15px;
 }
 
+/* CARD STYLE (LIKE JIJI) */
 .card {
   background: white;
-  padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.2s;
 }
 
-button {
-  background: green;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
+.card:hover {
+  transform: scale(1.02);
 }
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 10px;
+  font-size: 16px;
+}
+
+.card p {
+  margin: 5px 10px;
+  color: #555;
+}
+
+.card a {
+  display: block;
+  text-align: center;
+  background: #00a651;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #search {
+    width: 100%;
+  }
+        }
