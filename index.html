@@ -1,20 +1,90 @@
-<a href="admin.html" style="display:none;">Admin</a>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Buy Sell Kenya</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Admin Login - Buy Sell Kenya</title>
+  <style>
+    body { font-family: Arial; background:#f4f4f4; display:flex; justify-content:center; align-items:center; height:100vh; }
+    .box { background:white; padding:20px; border-radius:10px; width:300px; text-align:center; }
+    input { width:90%; padding:10px; margin:10px 0; }
+    button { padding:10px; width:100%; background:green; color:white; border:none; }
+    #dashboard { display:none; }
+    .card { background:white; padding:10px; margin:10px 0; border-radius:8px; }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Buy Sell Kenya</h1>
-  <input type="text" id="search" placeholder="Search items..." onkeyup="searchItems()">
-  <a href="post.html">+ Post Item</a>
-</header>
+<!-- LOGIN BOX -->
+<div id="loginBox" class="box">
+  <h2>Admin Login</h2>
+  <input type="password" id="password" placeholder="Enter admin password">
+  <button onclick="login()">Login</button>
+  <p id="error" style="color:red;"></p>
+</div>
 
-<section id="items"></section>
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <h1>Buy Sell Kenya - Admin Dashboard</h1>
+  <div id="items"></div>
+</div>
 
-<script src="app.js"></script>
+<script>
+const ADMIN_PASSWORD = "1234"; // 🔐 CHANGE THIS PASSWORD
+
+function login() {
+  let pass = document.getElementById("password").value;
+
+  if (pass === ADMIN_PASSWORD) {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    loadItems();
+  } else {
+    document.getElementById("error").innerText = "Wrong password!";
+  }
+}
+
+function getItems() {
+  return JSON.parse(localStorage.getItem("items") || "[]");
+}
+
+function saveItems(items) {
+  localStorage.setItem("items", JSON.stringify(items));
+}
+
+function loadItems() {
+  let items = getItems();
+  let container = document.getElementById("items");
+  container.innerHTML = "";
+
+  items.forEach((item, index) => {
+    container.innerHTML += `
+      <div class="card">
+        <h3>${item.name}</h3>
+        <p>Price: KSh ${item.price}</p>
+        <p>Phone: ${item.phone}</p>
+        <p>Payment Code: ${item.paymentCode || "N/A"}</p>
+        <p>Status: ${item.status}</p>
+
+        <button onclick="approve(${index})">Approve</button>
+        <button onclick="removeItem(${index})">Delete</button>
+      </div>
+    `;
+  });
+}
+
+function approve(i) {
+  let items = getItems();
+  items[i].status = "approved";
+  saveItems(items);
+  loadItems();
+}
+
+function removeItem(i) {
+  let items = getItems();
+  items.splice(i, 1);
+  saveItems(items);
+  loadItems();
+}
+</script>
+
 </body>
-  </html>
+</html>
