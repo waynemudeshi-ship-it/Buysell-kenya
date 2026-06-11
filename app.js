@@ -61,14 +61,14 @@ function displayItems(data) {
   data.forEach(item => {
     container.innerHTML += `
       <div class="card">
-        <img src="${item.image}" width="100%">
+        <img src="${item.image}">
         <h3>${item.name}</h3>
         <p>KSh ${item.price}</p>
-        <a href="https://wa.me/${item.phone}">Chat Seller</a>
+        <a href="https://wa.me/${item.phone}" target="_blank">Chat Seller</a>
       </div>
     `;
   });
-}
+    }
 
 function searchItems() {
   let q = document.getElementById("search").value.toLowerCase();
