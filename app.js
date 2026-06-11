@@ -1,3 +1,30 @@
+function addItem(e) {
+  e.preventDefault();
+
+  let mpesaCode = document.getElementById("mpesaCode").value;
+
+  if (!mpesaCode) {
+    alert("Please enter your M-Pesa transaction code");
+    return;
+  }
+
+  let items = getItems();
+
+  let newItem = {
+    name: document.getElementById("name").value,
+    price: document.getElementById("price").value,
+    phone: document.getElementById("phone").value,
+    image: document.getElementById("image").value || "https://via.placeholder.com/150",
+    paymentCode: mpesaCode,
+    status: "pending"
+  };
+
+  items.push(newItem);
+  saveItems(items);
+
+  alert("Submitted! Waiting for approval.");
+  window.location.href = "index.html";
+}
 function getItems() {
   return JSON.parse(localStorage.getItem("items") || "[]");
 }
